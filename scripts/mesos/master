@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+MESOS_VERSION=1.2.0-2.0.2
+
+# Install zookeeper:
+apt-get install -y zookeeperd
+
+# Mesosphere sources lists:
+apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF
+echo "deb http://repos.mesosphere.io/ubuntu trusty main" | tee /etc/apt/sources.list.d/mesosphere.list
+apt-get update
+
+# Install mesos:
+apt-get install -y mesos=$MESOS_VERSION
+
+# Delete slave files:
+rm /etc/init/mesos-slave.conf
+rm -rf /etc/mesos-slave
+rm -rf /etc/default/mesos-slave
+
+# Install marathon:
+apt-get install -y marathon

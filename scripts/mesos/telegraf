@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+TELEGRAF_VERSION=1.2.1
+wget https://dl.influxdata.com/telegraf/releases/telegraf_"$TELEGRAF_VERSION"_amd64.deb
+dpkg -i telegraf_"$TELEGRAF_VERSION"_amd64.deb

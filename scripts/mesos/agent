@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+MESOS_VERSION=1.2.0-2.0.2
+
+# Mesosphere sources lists:
+apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF
+echo "deb http://repos.mesosphere.io/ubuntu trusty main" | tee /etc/apt/sources.list.d/mesosphere.list
+apt-get update
+
+# Install mesos:
+apt-get install -y mesos=$MESOS_VERSION
+echo "docker,mesos" > /etc/mesos-slave/containerizers
+service mesos-master stop
+
+# Delete master files:
+rm /etc/init/mesos-master.conf
+rm -rf /etc/mesos-master
+rm -rf /etc/default/mesos-master
+rm -rf /var/lib/mesos/*
